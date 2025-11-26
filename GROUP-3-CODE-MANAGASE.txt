@@ -1,0 +1,86 @@
+import random
+
+def run_quiz():
+    print("QUIZ SUBJECT REVIEWER")
+
+    print("Subjects available:")
+    print("1. ITE 260")
+    print("2. ITE 366")
+    print("3. GEN-002 Understanding the Self")
+
+    subject = input("Choose a subject (1-3): ")
+
+    score = 0
+    total = 5
+    subject_name = ""
+
+    
+    if subject == "1":
+        subject_name = "ITE 260"
+        questions = [
+            ["Which of the following is a loop structure in Python?", ["if", "while", "def", "break"], "while"],
+            ["How many times will this loop run? for i in range(5):", ["4 times", "5 times", "6 times", "Infinite times"], "5 times"],
+            ["What keyword is used to exit a loop early?", ["exit", "continue", "break", "stop"], "break"],
+            ["Which keyword is used to skip the rest of the current loop iteration?", ["skip", "continue", "pass", "break"], "continue"],
+            ["What type of loop will always execute at least once in Python?", ["for loop", "while loop with False condition", "There is no 'do-while' in Python", "nested loop"], "There is no 'do-while' in Python"]
+        ]
+
+    
+    elif subject == "2":
+        subject_name = "ITE 366"
+        questions = [
+            ["Which component is considered the 'brain' of the computer?", ["RAM", "CPU", "GPU", "Motherboard"], "CPU"],
+            ["What does RAM stand for?", ["Random Access Memory", "Read Access Module", "Run All Memory", "Real Active Memory"], "Random Access Memory"],
+            ["Which part of the computer is responsible for storing data permanently?", ["CPU", "Monitor", "Hard Drive", "Keyboard"], "Hard Drive"],
+            ["Which part connects all other components of the computer together?", ["Motherboard", "Power Supply", "CPU", "GPU"], "Motherboard"],
+            ["Which device is an example of an output device?", ["Printer", "Keyboard", "Mouse", "Scanner"], "Printer"]
+        ]
+
+    
+    elif subject == "3":
+        subject_name = "GEN-002 Understanding the Self"
+        questions = [
+            ["Which philosopher said 'Know thyself'?", ["Aristotle", "Socrates", "Plato", "Descartes"], "Socrates"],
+            ["What is self-concept?", ["The image we have of ourselves", "How others see us", "Our personality type", "Our emotions"], "The image we have of ourselves"],
+            ["Which part of the brain controls decision-making and reasoning?", ["Cerebellum", "Medulla", "Frontal Lobe", "Occipital Lobe"], "Frontal Lobe"],
+            ["Self-esteem refers to:", ["A person's perception of their own worth", "How others treat us", "Our academic performance", "Emotional intelligence"], "A person's perception of their own worth"],
+            ["Which factor greatly influences personality development?", ["Genetics", "Environment", "Both genetics and environment", "None of the above"], "Both genetics and environment"]
+        ]
+    else:
+        print("Invalid choice. Please choose 1, 2, or 3.")
+        return
+
+    #Shuffle questions
+    random.shuffle(questions)
+    print(subject_name + " QUIZ")
+
+    #Quiz Loop
+    for i, q in enumerate(questions, 1):
+        question, choices, correct = q
+        random.shuffle(choices)
+        print("Question " + str(i) + ": " + question)
+        letters = ["a", "b", "c", "d"]
+        for j, choice in enumerate(choices):
+            print(letters[j] + ". " + choice)
+        ans = input("Your answer: ").lower()
+        index = letters.index(ans) if ans in letters else -1
+        if index != -1 and choices[index] == correct:
+            print("Correct!")
+            score += 1
+        else:
+            print("Wrong! The correct answer is: " + correct)
+
+    #Results 
+    print("QUIZ RESULTS")
+    print("Subject: " + subject_name)
+    print("Your total score: " + str(score) + "/" + str(total))
+    print("Thank you for using Quiz Subject Reviewer!")
+
+#Try again option
+while True:
+    run_quiz()
+    again = input("Do you want to try again? (yes/no): ").lower()
+    if again != "yes":
+        print("Goodbye!")
+        break
+33
